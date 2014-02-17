@@ -19,6 +19,9 @@ def linecount(top_directory = '.', filetypes = None, verbose = False):
     will be counted.
     """
 
+    if not os.path.exists(top_directory):
+        sys.exit("{0}: not a valid directory".format(top_directory))
+
     if verbose is None:
         verbose = False
 
@@ -90,5 +93,9 @@ if __name__ == "__main__":
 
     if options.verbose:
         print "Filetypes: {0}".format(filetypes)
+
+    directory = os.getcwd()
+    if len(args) > 0:
+        directory = args[0]
         
-    print linecount(os.getcwd(), filetypes, options.verbose)
+    print linecount(directory, filetypes, options.verbose)
